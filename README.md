@@ -4,7 +4,7 @@
 
 `goshoyuta/qmk_firmware` の `keyboards/crkbd/keymaps/my_keymaps/keymap.c`
 （リビジョン `955a8d658c839dd47f973bd6e6fea42cbbe7641a`）をNickey44へ移植しています。
-元の42キーの配置と4レイヤーを維持し、増えた2キーにStudio解除とDeleteを割り当てました。
+元の42キーの配置と4レイヤーを維持し、増えた2キーにBT接続とDeleteを割り当てました。
 
 - Escをタップ / Ctrlを長押し
 - 無変換をタップ / 移動・編集レイヤー1を長押し
@@ -14,7 +14,10 @@
 
 管理レイヤーではQ/W/E/R/Tの位置でBluetooth接続先0〜4、Tabで選択中の登録消去、
 HでUSB出力、JでBluetooth出力を選びます。
-現在のStudio解除キーは、左側のBの右にある追加キーです。
+左側のBの右にある追加キーを1回押すと、Bluetooth接続先0を選び、Bluetooth出力に切り替えます。
+AndroidのBluetooth設定から `nickey` を選んでペア設定してください。
+登録済みの接続先0なら、その端末への再接続に使えます。登録情報は消しません。
+Studio解除は管理レイヤー4で同じ追加キーを押します。
 以下の作者READMEに記載された元の配置とは異なります。
 
 Androidでの書き込みと全レイヤーの配置図は `docs/corne-port.html` をブラウザで開いてください。
