@@ -1,5 +1,28 @@
 # zmk-config-nickey
 
+## このForkのキーマップ
+
+`goshoyuta/qmk_firmware` の `keyboards/crkbd/keymaps/my_keymaps/keymap.c`
+（リビジョン `955a8d658c839dd47f973bd6e6fea42cbbe7641a`）をNickey44へ移植しています。
+元の42キーの配置と4レイヤーを維持し、増えた2キーにStudio解除とDeleteを割り当てました。
+
+- Escをタップ / Ctrlを長押し
+- 無変換をタップ / 移動・編集レイヤー1を長押し
+- 変換をタップ / 記号レイヤー2を長押し
+- Enterをタップ / 数字・Fキーレイヤー3を長押し
+- 無変換と変換を順に押したまま、追加の管理レイヤー4へ移動
+
+管理レイヤーではQ/W/E/R/Tの位置でBluetooth接続先0〜4、Tabで選択中の登録消去、
+HでUSB出力、JでBluetooth出力を選びます。
+現在のStudio解除キーは、左側のBの右にある追加キーです。
+以下の作者READMEに記載された元の配置とは異なります。
+
+Androidでの書き込みと全レイヤーの配置図は `docs/corne-port.html` をブラウザで開いてください。
+`config/nickey.keymap` は元のQMK設定を引き継いだGPL-2.0-or-laterです（`LICENSE-QMK`を参照）。
+それ以外の元リポジトリのライセンスはそのままです。
+
+---
+
 分割40%ワイヤレス自作キーボード **「Nickey44」** のZMK Firmware設定リポジトリです。
 
 ---
@@ -86,4 +109,4 @@ Keymap Editor での変更を Commit（または `main` ブランチへ Push）�
 
 ## 📄 ライセンス
 
-This repository is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The original repository files use the MIT License (see [LICENSE](LICENSE)). The ported `config/nickey.keymap` uses GPL-2.0-or-later (see [LICENSE-QMK](LICENSE-QMK)).

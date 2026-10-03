@@ -1,77 +1,86 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ * Copyright 2019 @foostan
+ * Copyright 2020 Drashna Jaelre <@drashna>
+ *
+ * Adapted from goshoyuta/qmk_firmware:
+ * keyboards/crkbd/keymaps/my_keymaps/keymap.c
+ * Source revision: 955a8d658c839dd47f973bd6e6fea42cbbe7641a
+ * Original Corne positions are preserved; Nickey44 adds positions 30 and 31.
+ */
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 
+// QMK PERMISSIVE_HOLD and RETRO_TAPPING, with its default 200 ms tapping term.
+// Quick-tap timing is an approximation: QMK and ZMK measure it differently.
 &mt {
     flavor = "balanced";
-    quick-tap-ms = <0>;
+    tapping-term-ms = <200>;
+    quick-tap-ms = <200>;
+    retro-tap;
 };
 
 &lt {
-    quick-tap-ms = <300>;
     flavor = "balanced";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <200>;
+    retro-tap;
 };
 
 / {
-    combos { compatible = "zmk,combos"; };
-
-    macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-    };
-
-    behaviors {
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
-
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
+            display-name = "QWERTY";
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T                              &kp Y    &kp U     &kp I      &kp O    &kp P     &kp SQT
-&kp LCTRL  &kp A  &kp S  &kp D  &kp F  &kp G                              &kp H    &kp J     &kp K      &kp L    &kp SEMI  &kp MINUS
-&kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp LEFT_WIN    &kp DELETE  &kp N    &kp M     &kp COMMA  &kp DOT  &kp FSLH  &kp EQUAL
-                                &mo 2  &mo 1  &kp SPACE       &kp BSPC    &kp RET  &kp RALT
+                &kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y  &kp U  &kp I  &kp O  &kp P  &kp BSPC
+                &mt LCTRL ESC  &kp A  &kp S  &kp D  &kp F  &kp G    &kp H  &kp J  &kp K  &kp L  &kp SEMI  &kp SQT
+                &kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &studio_unlock    &kp DELETE  &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                &kp LGUI  &lt 1 INT_MUHENKAN  &kp SPACE  &lt 3 RET  &lt 2 INT_HENKAN  &kp LALT
             >;
         };
 
-        layer_1 {
+        lower_layer {
+            display-name = "Navigation";
             bindings = <
-&kp ESCAPE  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                            &kp NUMBER_6      &kp N7                &kp N8                 &kp N9             &kp N0         &kp GRAVE
-&trans      &kp F1        &kp F2        &kp F3        &kp F4        &kp F5                                  &kp LEFT          &kp DOWN              &kp UP                 &kp RIGHT          &trans         &kp TILDE
-&trans      &kp F6        &kp F7        &kp F8        &kp F9        &kp F10       &mo 3     &studio_unlock  &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
-                                                      &trans        &trans        &trans    &kp DELETE      &trans            &trans
+                &kp TAB  &none  &none  &kp END  &none  &none    &none  &kp PG_UP  &none  &kp PG_DN  &none  &kp BSPC
+                &kp LCTRL  &kp HOME  &none  &kp DEL  &kp BSPC  &none    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &none  &none
+                &kp LSHFT  &none  &none  &none  &none  &none  &trans    &trans  &none  &none  &none  &none  &none  &none
+                &kp LGUI  &trans  &kp SPACE  &kp RET  &mo 4  &kp LALT
             >;
         };
 
-        layer_2 {
+        raise_layer {
+            display-name = "Symbols";
             bindings = <
-&trans  &trans  &trans     &trans      &trans  &trans                    &kp QUESTION   &trans  &trans  &trans  &kp PERCENT  &trans
-&trans  &kp AT  &kp HASH   &kp DOLLAR  &trans  &trans                    &kp EXCL       &trans  &trans  &trans  &trans       &trans
-&trans  &trans  &kp ASTRK  &kp CARET   &trans  &trans  &trans    &trans  &kp AMPERSAND  &trans  &trans  &trans  &trans       &trans
-                                       &trans  &trans  &trans    &trans  &trans         &trans
+                &kp TAB  &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR  &kp RPAR  &kp BSPC
+                &kp LCTRL  &none  &none  &none  &none  &none    &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT  &kp BSLH  &kp GRAVE
+                &kp LSHFT  &none  &none  &none  &none  &none  &trans    &trans  &kp UNDER  &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE  &kp TILDE
+                &kp LGUI  &mo 4  &kp SPACE  &kp RET  &trans  &kp LALT
             >;
         };
 
-        layer_3 {
+        number_layer {
+            display-name = "Numbers / F keys";
             bindings = <
-&bt BT_CLR      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &trans  &trans  &trans  &trans  &trans  &trans
-&bt BT_CLR_ALL  &trans        &trans        &trans        &trans        &trans                          &trans  &trans  &trans  &trans  &trans  &trans
-&trans          &trans        &trans        &trans        &trans        &trans        &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                                                          &trans        &trans        &trans    &trans  &trans  &trans
+                &kp TAB  &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6  &kp F7  &kp F8  &kp F9  &kp F10  &kp BSPC
+                &kp TAB  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &none
+                &none  &kp F11  &kp F12  &none  &none  &none  &trans    &trans  &none  &none  &none  &none  &none  &none
+                &kp LGUI  &trans  &kp SPACE  &kp RET  &trans  &kp LALT
+            >;
+        };
+
+        adjust_layer {
+            display-name = "Bluetooth / USB";
+            bindings = <
+                &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &none  &none  &none  &none  &none  &none
+                &none  &none  &none  &none  &none  &none    &out OUT_USB  &out OUT_BLE  &none  &none  &none  &none
+                &none  &none  &none  &none  &none  &none  &studio_unlock    &bootloader  &none  &none  &none  &none  &none  &none
+                &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
     };
