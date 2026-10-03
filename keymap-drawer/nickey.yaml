@@ -31,7 +31,7 @@ layers:
   - C
   - V
   - B
-  - '&studio_unlock'
+  - '&bt_phone'
   - DELETE
   - N
   - M
